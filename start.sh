@@ -27,10 +27,21 @@ if ! ps -p $XVFB_PID > /dev/null; then
 fi
 echo "Xvfb started successfully (PID: $XVFB_PID)"
 
-# Start Xfce4 desktop environment
-echo "Starting Xfce4 desktop environment..."
-startxfce4 &
-sleep 3
+# Setup DBus and XDG environment (Required for KDE)
+echo "Setting up DBus and XDG environment..."
+export XDG_RUNTIME_DIR=/tmp/runtime-root
+mkdir -p $XDG_RUNTIME_DIR
+chmod 700 $XDG_RUNTIME_DIR
+
+# Start DBus
+mkdir -p /var/run/dbus
+dbus-daemon --system --fork
+export DBUS_SESSION_BUS_ADDRESS=`dbus-daemon --fork --config-file=/usr/share/dbus-1/session.conf --print-address`
+
+# Start KDE Plasma desktop environment
+echo "Starting KDE Plasma desktop environment..."
+dbus-launch --exit-with-session /usr/bin/startplasma-x11 &
+sleep 10
 
 # Start x11vnc VNC server
 echo "Starting x11vnc server on localhost:5900..."
@@ -41,7 +52,6 @@ x11vnc \
     -shared \
     -rfbport 5900 \
     -localhost \
-    -nopw \
     &
 X11VNC_PID=$!
 sleep 2
