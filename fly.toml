@@ -1,26 +1,23 @@
-# Fly.io Application Configuration
-# Replace 'my-novnc-desktop' with your desired app name
+# fly.toml app configuration file generated for lj-vdoo on 2025-11-29T11:58:03Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
-app = "my-novnc-desktop"
-primary_region = "iad"
+app = 'lj-vdoo'
+primary_region = 'cdg'
 
 [build]
-
-[env]
-  # Set your VNC password here or use fly secrets
-  # VNC_PASSWORD = "YourSecurePassword123!"
-  # Better approach: fly secrets set VNC_PASSWORD="YourSecurePassword123!"
 
 [http_service]
   internal_port = 6080
   force_https = true
-  auto_stop_machines = false
+  auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 1
+  min_machines_running = 0
+  processes = ['app']
 
-[[services.http_checks]]
-  interval = "15s"
-  timeout = "10s"
-  grace_period = "30s"
-  method = "GET"
-  path = "/"
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 1024
