@@ -16,15 +16,24 @@ RUN apt-get update && apt-get install -y \
     # X11 and VNC components
     xvfb \
     x11vnc \
-    # Xfce4 desktop environment
-    xfce4 \
-    xfce4-terminal \
+    # KDE Plasma Desktop
+    kde-plasma-desktop \
+    breeze-icon-theme \
+    dolphin \
+    konsole \
+    dbus-x11 \
     # noVNC dependencies
     python3 \
     python3-pip \
     git \
     net-tools \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Google Chrome
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get update \
+    && apt-get install -y ./google-chrome-stable_current_amd64.deb \
+    && rm google-chrome-stable_current_amd64.deb
 
 # Install noVNC and websockify
 RUN git clone --depth 1 https://github.com/novnc/noVNC.git /usr/share/novnc \
