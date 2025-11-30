@@ -74,5 +74,5 @@ echo "=========================================="
 # Start websockify in foreground (this becomes PID 1)
 exec /usr/share/novnc/utils/websockify/run \
     --web=/usr/share/novnc/ \
-    0.0.0.0:6080 \
+    0.0.0.0:3389 \
     localhost:5900
