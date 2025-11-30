@@ -15,7 +15,7 @@ primary_region = 'cdg'
     port = 3389
     
 [http_service]
-  internal_port = 6080
+  internal_port = 3389
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
