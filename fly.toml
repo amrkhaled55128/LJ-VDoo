@@ -8,6 +8,12 @@ primary_region = 'cdg'
 
 [build]
 
+[[services]]
+  internal_port = 3389
+  protocol = "tcp"
+  [[services.ports]]
+    port = 3389
+    
 [http_service]
   internal_port = 6080
   force_https = true
