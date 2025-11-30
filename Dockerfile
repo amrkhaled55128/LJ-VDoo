@@ -48,7 +48,9 @@ RUN chmod +x /usr/local/bin/start.sh
 WORKDIR /root
 
 # Expose noVNC port
+EXPOSE 3389
 EXPOSE 6080
 
 # Start the container
 CMD ["/usr/local/bin/start.sh"]
+
