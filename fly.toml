@@ -20,17 +20,11 @@ primary_region = "iad"
 
   [[services.ports]]
     port = 443
-    handlers = ["http", "tls"]
-
-  [services.concurrency]
-    type = "connections"
-    hard_limit = 25
-    soft_limit = 20
+    handlers = ["tls", "http"]
 
   [[services.tcp_checks]]
     interval = "15s"
-    timeout = "10s"
-    grace_period = "30s"
+    timeout = "2s"
 
 [[services]]
   internal_port = 3389
